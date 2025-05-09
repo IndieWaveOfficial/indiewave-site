@@ -2,7 +2,8 @@
 <html>
 
 <head>
-	<title>IndieWave</title>
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+	<title>IndieWave - Portfolio</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -73,25 +74,25 @@
 					<!-- Add more as needed -->
 				  </div>
 				<font size="6">
-					<i class="fas fa-gamepad"></i> <a href="#Gamejam"><b>Game Jams</b></a>
+					<i class="fas fa-gamepad"></i> <a href="#Gamejam"><b>GAME JAMS</b></a>
 				</font>
-				<p>I have participated in a numerous amount of game jams, including the UDC GAMEJAM.</p>
+				<p>I’ve taken part in several game jams, including UDC, creating games under tight time constraints and collaborating effectively in team settings.</p>
 				<font size="6">
 					<i class="fas fa-dice-d6"></i> <a href="#3D"><b>3D ART</b></a>
 				</font>
-				<p>I spent alot of time working in many different 3D modelling software and making concepts come to life.</p>
+				<p>I’ve used tools like Blender and Maya to model environments and assets, focusing on clean topology and game-ready optimization.</p>
 				<font size="6">
 					<i class="fas fa-brush"></i> <a href="#2D"><b>2D ART</b></a>
 				</font>
-				<p>I have dipped my feet in 2D art and used software such as Photoshop, Krita and Aseprite.</p>
+				<p>I’ve explored 2D art using Photoshop, Krita, and Aseprite to design sprites, UI elements, and concept sketches.</p>
 				<font size="6">
-					<i class="fas fa-trophy"></i> <a href="#Tutorial"><b>Tutorials</b></a>
+					<i class="fas fa-trophy"></i> <a href="#Tutorial"><b>TUTORIALS</b></a>
 				</font>
-				<p>I have created many different tutorials such as enemy ai concepts as I enjoy giving knowledge to others.</p>
+				<p>I create tutorials on systems like enemy AI to share knowledge and help others learn game development techniques.</p>
 				<font size="6">
-					<i class="fas fa-code"></i> <a href="#Code"><b>Code Samples</b></a>
+					<i class="fas fa-code"></i> <a href="#Code"><b>CODE SNIPPETS</b></a>
 				</font>
-				<p>Snippets of code that might be useful.</p>
+				<p>A collection of useful code snippets from my projects, showcasing systems like movement, AI, and UI functionality.</p>
 			</article>
 
 			<!-- About -->
@@ -189,15 +190,69 @@
 
 
 				<font size="6">
-					<b>Enemy AI</b>
+					<b>Prototype -- SEMI Procedural 2D Dungeon Generation</b>
 				</font>
-				<p>Breadcrumb Move Towards Logic:
-				</p>
-				<img src="images/code1.png" class="responsive-img" alt="">
 
-				<p>Breadcrumb System:
-				</p>
-				<img src="images/code2.png" class="responsive-img" alt="">
+				<div class ="code-container">
+					<pre><code>        
+//Instantiate Room
+if(start)
+{
+	//Run RoomLogic
+	RoomLogic();
+	//This List stores all of the valid rooms.
+	List<GameObject> validRooms = new List<GameObject>();
+					
+	Debug.Log("Looking for rooms containing: " + target);
+					
+	//Check each room within the Roomset that has the correct door enterance (being target). For example, if you
+	//went through a L door, the target would be R, and any room prefab that contains R is added to this List.
+	foreach (GameObject room in roomset.roomPrefabs)
+	{
+		if (room != null && room.name.Contains(target))
+		{
+			validRooms.Add(room);
+		}
+	}
+							
+	Debug.Log("Total valid rooms found: " + validRooms.Count);
+					
+	//if != null
+	if (validRooms.Count > 0)
+	{
+		//Pick one random valid room
+		GameObject chosenRoom = validRooms[Random.Range(0, validRooms.Count)];
+		//Instantiate valid Room
+		currentRoom = Instantiate(chosenRoom, grid);
+	}
+	else
+	{
+		//no valid rooms found
+		Debug.LogWarning("No valid room found for direction: " + target);
+	}
+					
+	//Disable Door Behind Player
+	foreach (Transform child in currentRoom.transform)
+	{
+		if (child.CompareTag(target)) //Look for child that has the target tag, meaning thats the door that the
+		//player will come out of
+		{
+			BoxCollider2D[] collider = child.gameObject.GetComponents<BoxCollider2D>();
+			//Check all BoxCollider2D, and if they have 'trigger' enabled, disable the collider entirely.
+			foreach(Collider2D col in collider)
+			{
+				if(col.isTrigger)
+				{
+					col.enabled = false;
+				}
+			}
+			break;
+		}
+	}
+					
+}
+						</pre></code>
+				</div>
 
 			</article>
 
@@ -205,7 +260,7 @@
 	<article id="contact">
 		<h2 class="major">Contact</h2>
 			<p class="mail"><b>EMAIL: wavebusiness00@gmail.com</b></p>
-			<form action="https://formsubmit.co/032243df4133a6a0422a52ad8beedffe" method="POST">
+			<form action="mailto:wavebusiness00@gmail.com" method="POST">
 			<input type="hidden" name="_captcha" value="false">
 			<div class="fields">
 				<div class="field half">
