@@ -701,10 +701,6 @@ input, select, textarea {
 				width: 100%;
 			}
 
-			.image.main img:hover {
-				border-color: rgb(89, 89, 89)
-			}
-
 		@media screen and (max-width: 736px) {
 
 			.image.main {
@@ -1749,20 +1745,69 @@ input, select, textarea {
 	padding: .25rem;              /* Add padding around the code */
 	margin: 1rem 0;             /* Add margin for spacing */
 	background-color: #363636;  /* Optional: Set background color */
-	border-radius: 8px;         /* Optional: Round corners */
+	border-radius: 8px;         /* Optional: Round corners */]
   }
 
 .handle {
-  display: inline-block;
-  background-color: #1e1e1e;
-  color: #00fff2;
-  font-family: JetBrains Mono Nerd Font;
-  font-size: 1rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-  opacity: 0.85;
+  display: inline-block;  /* or block */
+  line-height: 1;         /* match height */
+  vertical-align: middle; /* aligns with surrounding elements */
+  padding: 1rem;             /* remove extra padding */
+  margin: 0.25rem;              /* remove extra margin */
+  height: 100%;           /* make it fill container if needed */
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffffff;
+  background-color: #111;
+  padding: 10px 10px;
+  border-radius: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 8px rgba(0, 255, 153, 0.3);
+  animation: flicker 2s infinite;
+  position: relative;
+}
 
-  margin-bottom: 1rem;
+/* Typewriter effect */
+.handle::before {
+  text-align: center;
+  content: '@indiewave';
+  display: inline-block;
+  overflow: hidden;
+  border-right: 2px solid #ffffff;
+  white-space: nowrap;
+  animation: typing 2s steps(10, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #ffffff;
+  }
+}
+
+/* Subtle flicker */
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  98% {
+    opacity: 0.9;
+  }
+  99% {
+    opacity: 0.85;
+  }
 }
 
 .youtube-link {
@@ -1825,4 +1870,106 @@ h1 span:hover {
     0 0 8px rgba(255, 255, 255, 1),
     0 0 15px rgba(255, 255, 255, 0.8),
     0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+/* Game Jams Article */
+#game-jams {
+  padding: 3rem 0;
+}
+
+#game-jams .major {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Reuse your fields/field grid */
+#game-jams .fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+#game-jams .field {
+  flex: 1 1 300px; /* two per row at min‑width 300px */
+  max-width: 46%;
+  box-sizing: border-box;
+}
+
+/* Jam card styling */
+#game-jams .jam-card {
+  background: #131313;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  transition: transform .2s, box-shadow .2s;
+}
+
+#game-jams .jam-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#game-jams .jam-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+#game-jams .jam-card h3 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+#game-jams .jam-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Button alignment */
+#game-jams .jam-card .actions {
+  margin-top: auto; /* push button to bottom */
+}
+
+#game-jams .jam-card .actions .button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 800px) {
+  #game-jams .field {
+    max-width: 100%;
+  }
+}
+
+/* Game Jams buttons */
+#game-jams .jam-card .button.primary {
+  background-color: #2e2e2e;   /* your accent color */
+  color: #ffffff;              /* white text */
+  border: none;                /* remove any default border */
+}
+
+#game-jams .jam-card .button.primary:hover {
+  background-color: #1d1d1d;   /* slightly darker on hover */
+}
+
+/* Ensure button text is white and centered */
+.button.primary {
+  color: #ffffff !important;       /* force white text */
+  text-align: center;              /* horizontal centering */
+  display: inline-flex;            /* enable flex centering */
+  align-items: center;             /* vertical centering */
+  justify-content: center;         /* horizontal centering inside */
+  padding: 0.6rem 1.2rem;          /* adjust for comfortable click area */
+  line-height: 1;                  /* prevent text from shifting */
+  border: none;                    /* remove default borders */
+  font-weight: 600;                /* optional, for contrast */
 }
